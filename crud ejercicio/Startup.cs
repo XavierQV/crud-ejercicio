@@ -32,9 +32,19 @@ namespace crud_ejercicio
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationUser, UserRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.ConfigureApplicationCookie(cook => 
+            {
+                cook.Cookie.HttpOnly = true;
+                cook.ExpireTimeSpan = TimeSpan.FromMinutes(25);
+                cook.LoginPath = "/Identity/Account/Login";
+                cook.AccessDeniedPath= "/Identity/Account/AccessDenied";
+                cook.SlidingExpiration = true;
+
+            });
             services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

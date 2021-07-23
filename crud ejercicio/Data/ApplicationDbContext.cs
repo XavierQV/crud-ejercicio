@@ -7,7 +7,7 @@ using System.Text;
 
 namespace crud_ejercicio.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser,UserRole,String>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -22,19 +22,23 @@ namespace crud_ejercicio.Data
                 ent.HasKey(en => en.Codigo);
 
                 ent.Property(en => en.Nombre)
-                //.IsRequired()
+                .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
                 ent.Property(en => en.Apellido)
-                //.IsRequired()
+                .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
                 ent.Property(en => en.Direccion)
-                //.IsRequired()
+                .IsRequired()
                 .HasMaxLength(250)
                 .IsUnicode(false);
+
+                ent.Property(en => en.Estado)
+                 .IsRequired()
+               .IsUnicode(false);
 
             });
         }

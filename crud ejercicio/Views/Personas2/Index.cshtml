@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<crud_ejercicio.Models.Persona>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inicio";
 }
 
-<h1>Index</h1>
+<h1>Inicio</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo</a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +37,19 @@
                 @Html.DisplayFor(modelItem => item.Direccion)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Codigo }, new { onclick = "return confirm('¡estas seguro de editar esto?');" }) |
-                @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Eliminar", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Editar", "Edit", new { id = item.Codigo }, new { onclick = "return confirm('¡Se editara esto!');" }) |
+                @Html.ActionLink("Detalles", "Details", new { ide = item.Codigo }, new { onclick = "return confirm('¡se mostraran detalles!');" }) |
+
+                @if(item.Estado == 1)
+                {
+                @Html.ActionLink("Desactivar", "Desactivar", new { id = item.Codigo }, new { onclick = "return confirm('¡SE Desactivara ESTO!');" })
+
+                }
+                else
+                {
+                @Html.ActionLink("Activar", "Activar", new { id = item.Codigo }, new { onclick = "return confirm('¡SE Activara ESTO!');" })
+
+                }
             </td>
         </tr>
 }
