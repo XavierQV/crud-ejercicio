@@ -4,7 +4,7 @@
     ViewData["Title"] = "Detalles";
 }
 
-<h1>Detalles</h1>
+<h1 style="color: cornflowerblue">Detalles</h1>
 
 <div>
     <h4>Persona</h4>
@@ -29,16 +29,30 @@
             @Html.DisplayFor(model => model.Direccion)
         </dd>
         <dt class="col-sm-2">
+            Genero
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.CodigoGenero == 1)
+            {
+                <label> Masculino </label>
+            }
+            else
+            {
+                <label> Femenino </label>
+            }
+
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Estado)
         </dt>
         <dd class="col-sm-10">
             @if (Model.Estado == 1)
             {
-                <label> ACTIVADO </label>
+                <label> Activado </label>
             }
             else
             {
-                <label> DESACTIVADO </label>
+                <label> Desactivado </label>
 
             }
         </dd>

@@ -4,7 +4,7 @@
     ViewData["Title"] = "CREAR";
 }
 
-<h1>CREAR</h1>
+<h1 style="color:deepskyblue">CREAR</h1>
 
 <h4>Persona</h4>
 <hr />
@@ -27,7 +27,12 @@
                 <input asp-for="Direccion" required class="form-control" />
                 <span asp-validation-for="Direccion" class="text-danger"></span>
             </div>
-           
+            <div class="form-group">
+                <label class="control-label">Genero</label>
+                <select asp-for="CodigoGenero" class="form-control" asp-items="ViewBag.CodigoGenero"></select>               
+                <span asp-validation-for="CodigoGenero" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Crear nuevo" class="btn btn-success" />
             </div>

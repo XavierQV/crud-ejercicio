@@ -1,7 +1,9 @@
 ﻿using crud_ejercicio.Data;
 using crud_ejercicio.Models;
+using crud_ejercicio.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +23,18 @@ namespace Crud_ejercicio.Controllers
         [Authorize(Roles= "Jefe,Vendedor")]
         public IActionResult Index()
         {
-            List<Persona> DPersona = new List<Persona>();
-            DPersona = _applicationDbContext.Persona.ToList();
+            List<PersonaViewModel> DPersona = new List<PersonaViewModel>();
+            DPersona = _applicationDbContext.Persona.Select(q => new PersonaViewModel 
+            { 
+                Codigo=q.Codigo,Nombre=q.Nombre,Apellido=q.Apellido,Direccion=q.Direccion,Estado=q.Estado,DescripcionGenero=q.CodigoGeneroNavigation.Descripcion
+            }).ToList();
 
             return View(DPersona);
         }
         [Authorize(Roles = "Jefe")]
         public IActionResult Create()
         {
+            ViewData["CodigoGenero"] = new SelectList(_applicationDbContext.Generos.Where(q => q.Estado == 1).ToList(), "Codigo", "Descripcion");
             return View();
         }
         [Authorize(Roles = "Jefe")]
@@ -44,7 +50,7 @@ namespace Crud_ejercicio.Controllers
             }
             catch (Exception exc)
             {
-
+                ViewData["CodigoGenero"] = new SelectList(_applicationDbContext.Generos.Where(q => q.Estado == 1).ToList(), "Codigo", "Descripcion", persona.CodigoGenero);
                 return View(persona);
 
             }
@@ -59,6 +65,7 @@ namespace Crud_ejercicio.Controllers
             Persona persona = _applicationDbContext.Persona.Where(q => q.Codigo == id).FirstOrDefault();
             if (persona == null)
                 return RedirectToAction("Index");
+            ViewData["CodigoGenero"] = new SelectList(_applicationDbContext.Generos.Where(q => q.Estado == 1).ToList(), "Codigo", "Descripcion", persona.CodigoGenero);
             return View(persona);
 
         }
@@ -76,7 +83,7 @@ namespace Crud_ejercicio.Controllers
             }
             catch (Exception exc)
             {
-
+                ViewData["CodigoGenero"] = new SelectList(_applicationDbContext.Generos.Where(q => q.Estado == 1).ToList(), "Codigo", "Descripcion", persona.CodigoGenero);
                 return View(persona);
 
             }

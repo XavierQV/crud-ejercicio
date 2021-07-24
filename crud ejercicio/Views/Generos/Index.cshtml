@@ -1,4 +1,4 @@
-﻿@model IEnumerable<crud_ejercicio.ViewModel.PersonaViewModel>
+﻿@model List<crud_ejercicio.Models.Genero>
 
 @{
     ViewData["Title"] = "Inicio";
@@ -7,22 +7,16 @@
 <h1 style="color:deepskyblue">Inicio</h1>
 
 <p>
-    <a asp-action="Create">Crear nuevo</a>
+    <a asp-action="Create">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
-                Genero
+                @Html.DisplayNameFor(model => model.FirstOrDefault(). Estado)
             </th>
             <th></th>
         </tr>
@@ -31,16 +25,17 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescripcionGenero)
+                @if (item.Estado == 1)
+                {
+                    <label>Activado</label>
+                }
+                else
+                {
+                     <label>Desactivado</label>
+                }               
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Codigo }, new { onclick = "return confirm('¡Se editara esto!');" }) |

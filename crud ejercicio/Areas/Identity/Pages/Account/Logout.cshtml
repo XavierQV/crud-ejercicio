@@ -1,21 +1,23 @@
 ﻿@page
 @model LogoutModel
-@{
-    ViewData["Title"] = "Cerrar sesión";
-}
+    <body background="https://static.vecteezy.com/system/resources/previews/002/254/521/large_2x/pastel-blue-color-painted-stain-watercolor-abstract-background-free-photo.jpg">
+        @{
+            ViewData["Title"] = "Cerrar sesión";
+        }
 
-<header>
-    <h1>@ViewData["Title"]</h1>
-    @{
-        if (User.Identity.IsAuthenticated)
-        {
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Click aqui para salir</button>
-            </form>
-        }
-        else
-        {
-             <p>Ha cerrado la sesión con éxito de la aplicación.</p>
-        }
-    }
-</header>
+        <header>
+            <h1>@ViewData["Title"]</h1>
+            @{
+                if (User.Identity.IsAuthenticated)
+                {
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" class="nav-link btn btn-link text-dark">Click aqui para salir</button>
+                    </form>
+                }
+                else
+                {
+                    <p>Ha cerrado la sesión con éxito de la aplicación.</p>
+                }
+            }
+        </header>
+    </body>

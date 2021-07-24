@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace crud_ejercicio.Models
+namespace crud_ejercicio.ViewModel
 {
-    public class Persona
+    public class PersonaViewModel
     {
         public int Codigo { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Direccion { get; set; }
         public int Estado { get; set; }
-        public int CodigoGenero { get; set; }
-
-        public virtual Genero CodigoGeneroNavigation { get; set; }
-
+        public string DescripcionGenero { get; set; }
     }
 }
